@@ -7,6 +7,7 @@ import { catchError, throwError } from 'rxjs';
 import { Produto } from 'src/app/domain/produto/produto';
 import { DialogMessageModal } from 'src/app/shared/dialog-message/dialog-message.modal';
 import { Router } from '@angular/router';
+import { DialogMessageService } from 'src/app/shared/dialog-message/dialog-message.service';
 
 @Component({
   selector: 'app-produto-list',
@@ -21,7 +22,8 @@ export class ProdutoListComponent implements OnInit {
   constructor(
     private readonly produtoEndpoint : ProdutoEndpoint,
     private dialog : MatDialog,
-    private router : Router
+    private router : Router,
+    private dialogMessageService : DialogMessageService
   ) {
    }
 
@@ -47,54 +49,18 @@ export class ProdutoListComponent implements OnInit {
 
   remove(produtos : Produto)
   {
-    this.openConfirmDialog().afterClosed().subscribe(x => {
+    this.dialogMessageService.openConfirmDialog().afterClosed().subscribe(x => {
       if (x)
         {
           this.produtoEndpoint.delete(produtos)
           .pipe(catchError((error : any) => {
-            this.openErrorDialog();
-            return throwError(() => error);
+            this.dialogMessageService.openErrorDialog(error.error.message);
+            return throwError(() => error.error.message);
           }))
           .subscribe(x => {
-            this.openSuccessDialog().afterClosed().subscribe(x => window.location.reload());
+            this.dialogMessageService.openSuccessDialog().afterClosed().subscribe(x => window.location.reload());
           })
         }
     });
-  }
-
-  private openConfirmDialog() : MatDialogRef<DialogMessageModal> {
-    return this.dialog.open(DialogMessageModal, {
-      width: '350px',
-      height: '300px',
-      data : {
-        iconStatus : "warning",
-        message : "Você realmente deseja deletar permanentemente esse registro?",
-        showCancelButton : true
-      }
-    })
-  }
-
-  private openErrorDialog() : MatDialogRef<DialogMessageModal> {
-    return this.dialog.open(DialogMessageModal, {
-      width: '350px',
-      height: '300px',
-      data : {
-        iconStatus : "error",
-        message : "Erro ao excluir registro.",
-        showCancelButton : false
-      }
-    })
-  }
-
-  private openSuccessDialog() : MatDialogRef<DialogMessageModal> {
-    return this.dialog.open(DialogMessageModal, {
-      width: '350px',
-      height: '300px',
-      data : {
-        iconStatus : "good",
-        message : "Registro excluido com sucesso !",
-        showCancelButton : false
-      }
-    })
   }
 }

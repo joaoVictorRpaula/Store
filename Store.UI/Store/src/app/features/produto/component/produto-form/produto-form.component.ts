@@ -36,7 +36,7 @@ export class ProdutoFormComponent implements OnInit {
     }
 
   ngOnInit() {
-    if (this.id != 0)
+    if (this.id != 0 && this.id != undefined)
       {
         this.produtoEndpoint.getById(this.id).pipe(catchError((error : any) => {
           this.dialogMessageService.openErrorDialog(`Erro ao buscar cliente id ${this.id}`);
@@ -53,7 +53,7 @@ export class ProdutoFormComponent implements OnInit {
   }
 
   onSubmit(){
-    if (this.id == 0)
+    if (this.id == 0 || this.id == undefined)
     {
       this.post();
     }

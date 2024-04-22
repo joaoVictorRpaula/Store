@@ -72,8 +72,6 @@ export class VendaFormComponent implements OnInit {
     else{
       this.addProduto();
     }
-    console.log(this.mainForm);
-    
   }
 
   private createProdutoFormGroup(produto: ProdutoDto): FormGroup  {
@@ -86,8 +84,6 @@ export class VendaFormComponent implements OnInit {
   }
 
   onSelectedProduto(index : number, produto : Produto, event : any){
-    console.log(this.mainForm);
-    
     if(event.isUserInput)
     {
       this.produtoFormArray.at(index).get("IdProduto")?.setValue(produto.IdProduto);
