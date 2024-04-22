@@ -10,5 +10,6 @@ namespace Store.DOMAIN.Services
 {
     public interface IClienteService : IBaseService<Cliente>
     {
+        Cliente GetById(int id);
     }
 }

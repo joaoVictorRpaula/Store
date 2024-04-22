@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Store.DOMAIN.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,8 @@ namespace Store.DOMAIN.Model
 {
     public class VendaDto
     {
-        public int idVenda { get; set; }
-        public DateTime dthVenda { get; set; }
-        public int idCliente { get; set; }
-        public int idProduto { get; set; }
-        public int qtdVenda { get; set; }
-        public decimal vlrUnitarioVenda { get; set; }
+        public long IdVenda { get; set; }
+        public IList<ProdutoDto> ProdutoDto { get; set; }
+        public Cliente Cliente { get; set; }
     }
 }

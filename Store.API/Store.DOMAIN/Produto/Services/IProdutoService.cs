@@ -10,5 +10,6 @@ namespace Store.DOMAIN.Services
 {
     public interface IProdutoService : IBaseService<Produto>
     {
+        Produto GetById(int id);
     }
 }

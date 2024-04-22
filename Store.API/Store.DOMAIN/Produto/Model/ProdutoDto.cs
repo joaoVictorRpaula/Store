@@ -8,8 +8,9 @@ namespace Store.DOMAIN.Model
 {
     public class ProdutoDto
     {
-        public int idProduto { get; set; }
-        public string dscProduto { get; set; }
-        public decimal vlrUnitario { get; set; }
+        public long IdProduto { get; set; }
+        public string DscProduto { get; set; }
+        public double VlrUnitario { get; set; }
+        public int QtdVenda { get; set; }
     }
 }

@@ -12,8 +12,15 @@ namespace Store.CORE.Services
 {
     public class ProdutoService : BaseService<Produto, IProdutoRepository>, IProdutoService
     {
+        private readonly IProdutoRepository _objRepository;
         public ProdutoService(IProdutoRepository objRepository) : base(objRepository)
         {
+            _objRepository = objRepository;
+        }
+
+        public Produto GetById(int id)
+        {
+            return _objRepository.GetAllNoTracking().FirstOrDefault(x => x.IdProduto == id);
         }
     }
 }

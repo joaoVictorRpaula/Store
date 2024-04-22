@@ -1,0 +1,35 @@
+<div class="title-div">
+  <h2>Lista de clientes</h2>
+  <button mat-raised-button class="title-div-button" routerLink="form">Adicionar</button>
+</div>
+
+<div class="list-div">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Nome do cliente, ou descrição do produto" #input>
+  </mat-form-field>
+
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="NmCliente">
+      <mat-header-cell *matHeaderCellDef> NmCliente </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.NmCliente}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Cidade">
+      <mat-header-cell *matHeaderCellDef> Cidade </mat-header-cell>
+      <mat-cell *matCellDef="let item">{{item.Cidade}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Actions">
+      <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+      <mat-cell *matCellDef="let item"> 
+          <mat-icon class="icon" aria-hidden="false" fontIcon="edit" (click)="edit(item)"></mat-icon>
+          <mat-icon class="icon" aria-hidden="false" fontIcon="delete" (click)="remove(item)"></mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

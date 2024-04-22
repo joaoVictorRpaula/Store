@@ -33,8 +33,8 @@ namespace Store.HostedService.HostedServices.Sync
         {
             await Task.Delay(1000);
 
-            while (!stoppingToken.IsCancellationRequested)
-            {
+            //while (!stoppingToken.IsCancellationRequested)
+            //{
                 _logger.LogInformation(
                     "Sync Api data started.");
 
@@ -43,8 +43,8 @@ namespace Store.HostedService.HostedServices.Sync
                     await SyncData(scope);
                 }
 
-                await Task.Delay(WaitingTime, stoppingToken);
-            }
+                //await Task.Delay(WaitingTime, stoppingToken);
+            //}
         }
 
         private async Task SyncData(IServiceScope scope)

@@ -1,5 +1,8 @@
-﻿using Store.INFRA.Base.Domain.Repositories;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Store.INFRA.Base.Domain.Repositories;
 using Store.INFRA.Base.Services;
+using Store.INFRA.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +30,20 @@ namespace Store.INFRA.Base.Core.Services
 
         public async Task<T> DeleteAsync(T obj)
         {
-            objRepository.Delete(obj);
-            await objRepository.Context.SaveChangesAsync();
+            try
+            {
+                objRepository.Delete(obj);
+                await objRepository.Context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is SqlException sqlException &&
+                (sqlException.Number == 547 || sqlException.Number == 2601))
+                {
+
+                    throw new CustomDbRelationException("Não é possível excluir este registro pois ele está sendo referenciado por outros registros.");
+                }
+            }
             return obj;
         }
         public async Task<T> UpdateAsync(T obj)

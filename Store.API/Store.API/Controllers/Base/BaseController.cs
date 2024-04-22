@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
+using Store.INFRA.Exceptions;
 using Store.INFRA.Base.Services;
 
 namespace Store.API.Controllers.Base
@@ -37,10 +38,17 @@ namespace Store.API.Controllers.Base
         }
 
         [HttpDelete]
-        [Route("({id})")]
         public virtual async Task<IActionResult> Delete(T obj)
         {
-            return Ok(await service.DeleteAsync(obj));
+            try
+            {
+                var result = await service.DeleteAsync(obj);
+                return Ok(result);
+            }
+            catch (CustomDbRelationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

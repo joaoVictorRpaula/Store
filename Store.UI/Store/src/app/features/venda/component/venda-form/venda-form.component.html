@@ -1,0 +1,57 @@
+<div class="title-div">
+  <h2>Adicionar vendas</h2>
+</div>
+
+<form class="main-form" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+  <div class="input-div">
+    <h2>Produto</h2>
+    <button *ngIf="id == 0 || id == undefined" mat-raised-button class="input-div-button" type="button" (click)="addProduto()">Adicionar</button>
+  </div>
+      <div class="produto-input" formArrayName="ProdutoDto">
+        <div class="produto-input-fields" *ngFor="let produtoFormGroup of produtoFormArray.controls; let i=index" [formGroupName]="i">
+          <mat-form-field class="produto-input-dsc" appearance="fill">
+            <mat-label>Produto</mat-label>
+            <input type="text"
+                  placeholder="Escolha o produto"
+                  aria-label="Produto"
+                  matInput
+                  formControlName="DscProduto"
+                  [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let item of produtoList" [value]="item.DscProduto" (onSelectionChange)="onSelectedProduto(i, item, $event)">
+                {{item.DscProduto}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field class="">
+            <mat-label>Quantidade</mat-label>
+            <input matInput #Qtd maxlength="5" placeholder="Ex. 1" type="number" formControlName="QtdVenda">
+          </mat-form-field>
+          <h2>R$ {{ produtoFormGroup.get("QtdVenda")?.value * produtoFormGroup.get("VlrUnitario")?.value }}</h2>
+          <mat-icon class="icon" aria-hidden="false" fontIcon="delete" (click)="onRemove(i)" *ngIf="i != 0"></mat-icon>
+        </div>
+      </div>
+    <div class="input-div">
+      <h2>Cliente</h2>
+    </div>
+    <div class="produto-input">
+        <mat-form-field class="cliente-input-nm" appearance="fill">
+          <mat-label>Cliente</mat-label>
+          <input type="text"
+                placeholder="Escolha o Cliente"
+                aria-label="Cliente"
+                matInput
+                [matAutocomplete]="auto2"
+                formControlName="Cliente">
+          <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFnCliente">
+            <mat-option *ngFor="let item of clienteList" [value]="item">
+              {{item.NmCliente}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+</form>
+<div class="submit-div">
+  <h2>Total: R$ {{total}}</h2>
+  <button mat-raised-button class="input-div-button" (click)="onSubmit()" [disabled]="!mainForm.valid" [class.disabled]="!mainForm.valid" >Salvar</button>
+</div>

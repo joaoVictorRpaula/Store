@@ -1,0 +1,61 @@
+.title-div{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.input-div{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 20px;
+    margin-left: 20px;
+    border-bottom: 2px solid #c4c4c4;
+    &-button{
+        background-color: #2f384e !important;
+        color: white !important;
+
+        &.disabled{
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.cliente-input-nm{
+    width: 80%;
+}
+
+.produto-input{
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    &-dsc{
+        margin-right: 30px;
+        width: 400px;
+    }
+    &-fields{
+        display: flex;
+        align-items: center;
+
+        h2{
+            margin-left: 20px;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 0px !important;
+        }
+    }
+}
+
+.submit-div{
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon{
+    cursor: pointer;
+}

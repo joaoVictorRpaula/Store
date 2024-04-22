@@ -1,0 +1,20 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side" [opened]="true">
+    <div class="sidenav-title">
+      <h2>STORE</h2>
+    </div>
+    <div class="itens-menu">
+      <span *ngFor="let item of menuItens">
+        <div class="flex-container" [routerLink]="item.route">
+          <mat-icon class="icon" aria-hidden="false" aria-label="Example home icon" fontIcon="{{item.iconName}}"></mat-icon>
+          <p>{{item.displayName}}</p>
+        </div>
+      </span>
+    </div>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>

@@ -12,8 +12,15 @@ namespace Store.CORE.Services
 {
     public class ClienteService : BaseService<Cliente, IClienteRepository>, IClienteService
     {
+        private readonly IClienteRepository _objRepository;
         public ClienteService(IClienteRepository objRepository) : base(objRepository)
         {
+            _objRepository = objRepository;
+        }
+
+        public Cliente GetById(int id)
+        {
+            return _objRepository.GetAllNoTracking().FirstOrDefault(x => x.IdCliente == id);
         }
     }
 }

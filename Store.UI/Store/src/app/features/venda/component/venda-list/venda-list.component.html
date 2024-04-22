@@ -1,0 +1,50 @@
+<div class="title-div">
+  <h2>Lista de vendas</h2>
+  <button mat-raised-button class="title-div-button" routerLink="form">Adicionar</button>
+</div>
+
+<div class="list-div">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Nome do cliente, ou descrição do produto" #input>
+  </mat-form-field>
+
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="DscProduto">
+      <mat-header-cell *matHeaderCellDef> DscProduto </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.Produto.DscProduto}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="NmCliente">
+      <mat-header-cell *matHeaderCellDef> NmCliente </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.Cliente.NmCliente}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="DthVenda">
+      <mat-header-cell *matHeaderCellDef> DthVenda </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.DthVenda | date}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="QtdVenda">
+      <mat-header-cell *matHeaderCellDef> QtdVenda </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.QtdVenda}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="VlrTotalVenda">
+      <mat-header-cell *matHeaderCellDef> VlrTotalVenda </mat-header-cell>
+      <mat-cell *matCellDef="let item"> R$ {{item.VlrTotalVenda}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Actions">
+      <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+      <mat-cell *matCellDef="let item"> 
+          <mat-icon class="icon" aria-hidden="false" fontIcon="edit" (click)="edit(item)"></mat-icon>
+          <mat-icon class="icon" aria-hidden="false" fontIcon="delete" (click)="remove(item)"></mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

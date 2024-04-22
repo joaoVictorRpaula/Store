@@ -1,0 +1,24 @@
+<div class="title-div">
+  <h2>Adicionar clientes</h2>
+</div>
+
+<form class="main-form" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+  <div class="input-div">
+    <h2>Cliente</h2>
+  </div>
+    <div class="produto-input">
+        <mat-form-field class="">
+          <mat-label>Nome</mat-label>
+          <input matInput maxlength="100" placeholder="Nome do cliente" type="text" formControlName="NmCliente">
+        </mat-form-field>
+    </div>
+    <div class="produto-input">
+      <mat-form-field class="">
+        <mat-label>Cidade</mat-label>
+        <input matInput maxlength="50" placeholder="Nome da cidade" type="text" formControlName="Cidade">
+      </mat-form-field>
+  </div>
+</form>
+<div class="submit-div">
+  <button mat-raised-button class="input-div-button" (click)="onSubmit()" [disabled]="!mainForm.valid" [class.disabled]="!mainForm.valid" >Salvar</button>
+</div>

@@ -1,0 +1,24 @@
+<div class="title-div">
+  <h2>Adicionar produtos</h2>
+</div>
+
+<form class="main-form" [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+  <div class="input-div">
+    <h2>Produto</h2>
+  </div>
+    <div class="produto-input">
+        <mat-form-field class="">
+          <mat-label>Descrição do produto</mat-label>
+          <input matInput maxlength="100" placeholder="Descrição do produto" type="text" formControlName="DscProduto">
+        </mat-form-field>
+    </div>
+    <div class="produto-input">
+      <mat-form-field class="">
+        <mat-label>Valor unitário do produto</mat-label>
+        <input matInput maxlength="5" placeholder="Ex. R$ 10" type="number" formControlName="VlrUnitario">
+      </mat-form-field>
+  </div>
+</form>
+<div class="submit-div">
+  <button mat-raised-button class="input-div-button" (click)="onSubmit()" [disabled]="!mainForm.valid" [class.disabled]="!mainForm.valid" >Salvar</button>
+</div>

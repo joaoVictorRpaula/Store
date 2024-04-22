@@ -1,0 +1,28 @@
+.mat-mdc-form-field {
+    width: 100%;
+  }
+
+.title-div{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 20px;
+
+    &-button{
+        background-color: #2f384e !important;
+        color: white !important;
+    }
+}
+
+.list-div{
+    padding: 20px;
+}
+
+.icon{
+    margin-right: 10px;
+    font-size: 1.6rem;
+    color: #2f384e;
+    cursor: pointer;
+}

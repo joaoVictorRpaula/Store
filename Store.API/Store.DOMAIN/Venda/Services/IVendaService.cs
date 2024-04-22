@@ -10,5 +10,8 @@ namespace Store.DOMAIN.Services
 {
     public interface IVendaService : IBaseService<Venda>
     {
+        Venda GetById(int id);
+        Task<List<Venda>> SaveVenda(VendaDto vendaDto);
+        Task<Venda> UpdateVenda (VendaDto vendaDto);
     }
 }
